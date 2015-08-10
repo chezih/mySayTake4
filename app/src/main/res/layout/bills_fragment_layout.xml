@@ -1,0 +1,6 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:background="@color/highlighted_text_material_dark"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <fragment class="com.chamud.cheziandsima.mysaytake4.Fragments.BillsFragment"
+        android:id="@+id/titles"
+        android:layout_width="match_parent" android:layout_height="match_parent" />
+</FrameLayout>
