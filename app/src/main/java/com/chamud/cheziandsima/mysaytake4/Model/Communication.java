@@ -55,7 +55,7 @@ public class Communication {
             c.setRequestMethod("GET");
             c.setRequestProperty("Content-length", "0");
             c.setRequestProperty("Content-Type", "text/json; charset=utf-8");
-            c.setRequestProperty("Authorization", "Token " + "4043572f06448bba9d9673a60a55c1c73274933a");
+            c.setRequestProperty("Authorization", "Token " + this.token);
             c.setUseCaches(false);
             c.setAllowUserInteraction(false);
             c.setConnectTimeout(timeout);

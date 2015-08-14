@@ -1,5 +1,6 @@
 package com.chamud.cheziandsima.mysaytake4.Fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ListFragment;
 import android.graphics.drawable.Drawable;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.chamud.cheziandsima.mysaytake4.Adapters.BillRowAdapter;
 import com.chamud.cheziandsima.mysaytake4.Model.BL;
@@ -24,7 +26,16 @@ import java.util.concurrent.ExecutionException;
  */
 public class BillsFragment extends ListFragment {
 
+
+    OnBillSelectedListener mListener;
+
+    // Container Activity must implement this interface
+    public interface OnBillSelectedListener {
+        public void onBillSelected(Bill bill);
+    }
+
     ArrayList<Bill> arrayOfBills;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -36,9 +47,29 @@ public class BillsFragment extends ListFragment {
 
         getListView().setDividerHeight(40);
 
-        new GetAllBillsAsync().execute();
+
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnBillSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
+        }
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+
+        Bill currentBill = arrayOfBills.get(position);
+        mListener.onBillSelected(currentBill);
+    }
+
+    public void getAllBills() {
+        new GetAllBillsAsync().execute();
+    }
 
     class GetAllBillsAsync extends AsyncTask<Void, Void, Void>
 

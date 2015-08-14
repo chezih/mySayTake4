@@ -1,17 +1,60 @@
 package com.chamud.cheziandsima.mysaytake4;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.chamud.cheziandsima.mysaytake4.Activities.BillDetailActivity;
+import com.chamud.cheziandsima.mysaytake4.Activities.LoginActivity;
+import com.chamud.cheziandsima.mysaytake4.Fragments.BillsFragment;
+import com.chamud.cheziandsima.mysaytake4.Model.BL;
+import com.chamud.cheziandsima.mysaytake4.Model.Entities.Bill;
+import com.chamud.cheziandsima.mysaytake4.Model.Entities.User;
+import com.chamud.cheziandsima.mysaytake4.Model.GlobalData;
+import com.chamud.cheziandsima.mysaytake4.Utils.CredentialsStorage;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements BillsFragment.OnBillSelectedListener{
+
+
+    TextView tv;
+    String loggedInUserName;
+    String loggedToken;
+    User currentUser;
+    ProgressDialog progress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // To retrieve values back
+        loggedInUserName = CredentialsStorage.getFromPrefs(MainActivity.this, CredentialsStorage.PREFS_LOGIN_USERNAME_KEY, "");
+        loggedToken = CredentialsStorage.getFromPrefs(MainActivity.this, CredentialsStorage.PREFS_LOGIN_TOKEN_KEY, "");
+
+
+
+        if (loggedToken == "") {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        } else {
+            BL.getInstance().setToken(loggedToken);
+            BillsFragment billsFragment = (BillsFragment) getFragmentManager().findFragmentById(R.id.billFragment);
+            billsFragment.getAllBills();
+            new GetAllUsersAsync().execute();
+        }
+
     }
 
     @Override
@@ -35,4 +78,59 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    ArrayList<User> users;
+
+    @Override
+    public void onBillSelected(Bill bill) {
+        Intent intent = new Intent(MainActivity.this, BillDetailActivity.class);
+        intent.putExtra("currentBill",bill);
+        startActivity(intent);
+    }
+
+    class GetAllUsersAsync extends AsyncTask<Void, Void, Void>
+
+    {
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
+//            for (int i = 0; i < users.size(); i++) {
+//                result += "USER #" + i + "\n";
+//                result += "Id: " + users.get(i).getId() + "\n";
+//                result += "Name: " + users.get(i).getName() + "\n\n";
+//            }
+//
+//            result += loggedToken;
+//            tv.setText(result);
+        }
+
+        @Override
+        protected Void doInBackground(Void... urls) {
+
+            try {
+                users = BL.getInstance().getAllUsers();
+                ((GlobalData) MainActivity.this.getApplication()).setSavedUsers(users);
+                for (User user : users) {
+
+                    if (loggedInUserName.equals(user.getFirstName())) {
+                        currentUser = user;
+                    }
+                    // 1 - can call methods of element
+
+                    // ...
+                }
+//                Token = TokenGetter.executePost(new JSONObject("{\"password\": \"050788\", \"username\": \"chezi\"}"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+    }
+
 }
