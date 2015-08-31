@@ -10,6 +10,7 @@ import java.util.Iterator;
  * Created by Choyzer on 23/06/2015.
  */
 public class User implements Serializable {
+    String userName;
     int id;
     String firstName;
     String lastName;
@@ -36,6 +37,10 @@ public class User implements Serializable {
                     this.firstName = userJson.getString(key);
                     break;
                 }
+                case "user name": {
+                    this.userName = userJson.getString(key);
+                    break;
+                }
                 case "last_name": {
                     this.lastName = userJson.getString(key);
                     break;
@@ -44,13 +49,16 @@ public class User implements Serializable {
                     this.email = userJson.getString(key);
                     break;
                 }
-                case "address":
-                {
+                case "address": {
                     this.address = userJson.getString(key);
                     break;
                 }
                 case "party": {
-                    this.party = userJson.getInt(key);
+                    if (userJson.getString(key) == "null") {
+                        this.party = -1;
+                    } else {
+                        this.party = userJson.getInt(key);
+                    }
                     break;
                 }
                 case "photo": {
@@ -79,6 +87,11 @@ public class User implements Serializable {
 
     public String getFirstName() {
         return firstName;
+    }
+
+
+    public String getUserName() {
+        return userName;
     }
 
     public void setFirstName(String firstName) {

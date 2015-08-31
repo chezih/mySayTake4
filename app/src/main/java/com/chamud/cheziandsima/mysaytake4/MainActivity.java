@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.chamud.cheziandsima.mysaytake4.Activities.BillDetailActivity;
 import com.chamud.cheziandsima.mysaytake4.Activities.LoginActivity;
+import com.chamud.cheziandsima.mysaytake4.Activities.UserProfileActivity;
 import com.chamud.cheziandsima.mysaytake4.Fragments.BillsFragment;
 import com.chamud.cheziandsima.mysaytake4.Model.BL;
 import com.chamud.cheziandsima.mysaytake4.Model.Entities.Bill;
@@ -57,6 +58,8 @@ public class MainActivity extends ActionBarActivity implements BillsFragment.OnB
 
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -75,7 +78,29 @@ public class MainActivity extends ActionBarActivity implements BillsFragment.OnB
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.action_userProfile) {
+//            try {
+//                getAllUsers(this.findViewById(android.R.id.content));
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
+            Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
+            intent.putExtra("currentUser", currentUser);
+            startActivity(intent);
+        }
+        if (id == R.id.action_logOut) {
+            loggedInUserName = "";
+            loggedToken = "";
+            CredentialsStorage.saveToPrefs(MainActivity.this, CredentialsStorage.PREFS_LOGIN_USERNAME_KEY, "");
+            CredentialsStorage.saveToPrefs(MainActivity.this, CredentialsStorage.PREFS_LOGIN_TOKEN_KEY, "");
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -113,7 +138,7 @@ public class MainActivity extends ActionBarActivity implements BillsFragment.OnB
                 ((GlobalData) MainActivity.this.getApplication()).setSavedUsers(users);
                 for (User user : users) {
 
-                    if (loggedInUserName.equals(user.getFirstName())) {
+                    if (loggedInUserName.equals(user.getUserName())) {
                         currentUser = user;
                     }
                     // 1 - can call methods of element

@@ -39,10 +39,10 @@ public class BillDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bill_details);
-        progress = new ProgressDialog(BillDetailActivity.this);
-        progress.setTitle(getString(R.string.Login_dialog_head));
-        progress.setMessage(getString(R.string.Login_dialog_message));
-        progress.show();
+//        progress = new ProgressDialog(BillDetailActivity.this);
+//        progress.setTitle(getString(R.string.Login_dialog_head));
+//        progress.setMessage(getString(R.string.Login_dialog_message));
+//        progress.show();
         Intent intent = getIntent();
         currentBill = (Bill) intent.getSerializableExtra("currentBill");
         billDetailSubjectTextView = (TextView) findViewById(R.id.billDetailSubjectTextView);
@@ -98,7 +98,7 @@ public class BillDetailActivity extends Activity {
 
             try {
                 arrayOfBillComments = BL.getInstance().getBillsComments(currentBill.getId());
-                progress.dismiss();
+               // progress.dismiss();
 //                Token = TokenGetter.executePost(new JSONObject("{\"password\": \"050788\", \"username\": \"chezi\"}"));
             } catch (JSONException e) {
                 e.printStackTrace();
