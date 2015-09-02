@@ -40,13 +40,20 @@ public class MainActivity extends ActionBarActivity implements BillsFragment.OnB
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setTitle("MySay");
+        getSupportActionBar().setIcon(R.mipmap.my_say_icon);
+
+        //to enable back button
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setHomeButtonEnabled(true);
+
         // To retrieve values back
         loggedInUserName = CredentialsStorage.getFromPrefs(MainActivity.this, CredentialsStorage.PREFS_LOGIN_USERNAME_KEY, "");
         loggedToken = CredentialsStorage.getFromPrefs(MainActivity.this, CredentialsStorage.PREFS_LOGIN_TOKEN_KEY, "");
 
 
 
-        if (loggedToken == "") {
+        if (loggedToken.equals("")) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
         } else {
@@ -55,6 +62,7 @@ public class MainActivity extends ActionBarActivity implements BillsFragment.OnB
             billsFragment.getAllBills();
             new GetAllUsersAsync().execute();
         }
+
 
     }
 

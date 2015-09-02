@@ -14,7 +14,7 @@
         android:id="@+id/billDetailSubjectTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1A237E"
+        android:background="#2196F3"
         android:text="Subject"
         android:textColor="#FFFFFF"
         android:textSize="20sp" />
@@ -23,7 +23,7 @@
         android:id="@+id/billDetailDescriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#B39DDB"
+        android:background="#BBDEFB"
         android:paddingTop="10dp"
         android:text="Description"
         android:textSize="16sp"
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@android:color/transparent"
-        android:dividerHeight="10.0sp">
+        android:dividerHeight="6.0sp">
     </ListView>
 
 </LinearLayout>

@@ -18,8 +18,9 @@
         android:id="@+id/billDescriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#90CAF9"
+        android:background="#BBDEFB"
         android:paddingTop="10dp"
         android:text="Description"
+        android:textColor="#000000"
         android:textSize="16sp"/>
 </LinearLayout>

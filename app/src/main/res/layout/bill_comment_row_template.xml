@@ -9,7 +9,7 @@
         android:id="@+id/commentContentTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2196F3"
+        android:background="#009688"
         android:text="Subject"
         android:textColor="#FFFFFF"
         android:textSize="20sp" />
@@ -18,7 +18,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#90CAF9"
+        android:background="#E0F2F1"
         android:gravity="end"
         android:orientation="horizontal">
 

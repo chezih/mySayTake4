@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:background="@color/highlighted_text_material_dark"
+        android:background="@color/bright_foreground_disabled_material_dark"
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,9 +23,9 @@
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="search" />
+                android:text="חיפוש" />
         </LinearLayout>
-        <fragment android:layout_margin="30dp"
+        <fragment android:layout_margin="10dp"
             android:id="@+id/billFragment"
             class="com.chamud.cheziandsima.mysaytake4.Fragments.BillsFragment"
             android:layout_width="match_parent"
