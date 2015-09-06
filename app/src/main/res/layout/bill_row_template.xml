@@ -19,8 +19,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#BBDEFB"
-        android:paddingTop="10dp"
+        android:paddingTop="5dp"
         android:text="Description"
         android:textColor="#000000"
         android:textSize="16sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="נגד"
+            android:id="@+id/button" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="נמנע"
+            android:id="@+id/button2" />
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="בעד"
+            android:id="@+id/button3" />
+    </LinearLayout>
+
+
+
+
 </LinearLayout>
