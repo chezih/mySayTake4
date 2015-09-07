@@ -9,4 +9,6 @@
     <string name="against_vote">נגד</string>
     <string name="avoid_vote">נמנע</string>
     <string name="for_vote">בעד</string>
+    <string name="private_bills">הצעות חוק פרטיות</string>
+    <string name="bills">הצעות חוק</string>
 </resources>

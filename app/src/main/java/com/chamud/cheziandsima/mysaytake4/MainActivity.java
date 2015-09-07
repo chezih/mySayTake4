@@ -1,8 +1,11 @@
 package com.chamud.cheziandsima.mysaytake4;
 
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,11 +16,13 @@ import android.widget.TextView;
 import com.chamud.cheziandsima.mysaytake4.Activities.BillDetailActivity;
 import com.chamud.cheziandsima.mysaytake4.Activities.LoginActivity;
 import com.chamud.cheziandsima.mysaytake4.Activities.UserProfileActivity;
+import com.chamud.cheziandsima.mysaytake4.Adapters.TabsPageAdapter;
 import com.chamud.cheziandsima.mysaytake4.Fragments.BillsFragment;
 import com.chamud.cheziandsima.mysaytake4.Model.BL;
 import com.chamud.cheziandsima.mysaytake4.Model.Entities.Bill;
 import com.chamud.cheziandsima.mysaytake4.Model.Entities.User;
 import com.chamud.cheziandsima.mysaytake4.Model.GlobalData;
+import com.chamud.cheziandsima.mysaytake4.Stab.SlidingTabLayout;
 import com.chamud.cheziandsima.mysaytake4.Utils.CredentialsStorage;
 
 import org.json.JSONException;
@@ -26,9 +31,9 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 
-public class MainActivity extends ActionBarActivity implements BillsFragment.OnBillSelectedListener{
+public class MainActivity extends ActionBarActivity implements BillsFragment.OnBillSelectedListener {
 
-
+    private ViewPager viewPager;
     TextView tv;
     String loggedInUserName;
     String loggedToken;
@@ -40,6 +45,15 @@ public class MainActivity extends ActionBarActivity implements BillsFragment.OnB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        viewPager = (ViewPager) findViewById(R.id.pager);
+
+        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        TabsPageAdapter mAdapter = new TabsPageAdapter(getSupportFragmentManager(), MainActivity.this);
+        slidingTabLayout.setDistributeEvenly(true);
+        viewPager.setAdapter(mAdapter);
+        slidingTabLayout.setViewPager(viewPager);
+
 
         setTitle("MySay");
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
@@ -54,20 +68,18 @@ public class MainActivity extends ActionBarActivity implements BillsFragment.OnB
         loggedToken = CredentialsStorage.getFromPrefs(MainActivity.this, CredentialsStorage.PREFS_LOGIN_TOKEN_KEY, "");
 
 
-
         if (loggedToken.equals("")) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
         } else {
             BL.getInstance().setToken(loggedToken);
-            BillsFragment billsFragment = (BillsFragment) getFragmentManager().findFragmentById(R.id.billFragment);
-            billsFragment.getAllBills();
+            // BillsFragment billsFragment = (BillsFragment) getFragmentManager().findFragmentById(R.id.billFragment);
+            //billsFragment.getAllBills();
             new GetAllUsersAsync().execute();
         }
 
 
     }
-
 
 
     @Override
@@ -120,7 +132,7 @@ public class MainActivity extends ActionBarActivity implements BillsFragment.OnB
     @Override
     public void onBillSelected(Bill bill) {
         Intent intent = new Intent(MainActivity.this, BillDetailActivity.class);
-        intent.putExtra("currentBill",bill);
+        intent.putExtra("currentBill", bill);
         startActivity(intent);
     }
 

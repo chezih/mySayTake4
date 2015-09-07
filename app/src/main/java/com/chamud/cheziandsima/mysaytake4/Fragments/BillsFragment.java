@@ -2,10 +2,10 @@ package com.chamud.cheziandsima.mysaytake4.Fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.ListFragment;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +46,8 @@ public class BillsFragment extends ListFragment {
 //then set the height dynamically
 
         getListView().setDividerHeight(40);
+
+        this.getAllBills();
 
 
     }
