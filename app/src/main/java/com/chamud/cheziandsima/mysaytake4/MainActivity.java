@@ -3,6 +3,7 @@ package com.chamud.cheziandsima.mysaytake4;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -41,6 +42,7 @@ public class MainActivity extends ActionBarActivity implements BillsFragment.OnB
         setContentView(R.layout.activity_main);
 
         setTitle("MySay");
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
         getSupportActionBar().setIcon(R.mipmap.my_say_icon);
 
         //to enable back button
