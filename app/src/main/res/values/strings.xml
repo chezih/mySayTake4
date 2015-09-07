@@ -6,4 +6,7 @@
     <string name="Login_dialog_head">טוען</string>
     <string name="Login_dialog_message">אנא המתן</string>
     <string name="action_userProfile">פרופיל משתמש</string>
+    <string name="against_vote">נגד</string>
+    <string name="avoid_vote">נמנע</string>
+    <string name="for_vote">בעד</string>
 </resources>

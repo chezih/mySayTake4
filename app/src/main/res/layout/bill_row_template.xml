@@ -3,7 +3,8 @@
     android:layout_height="match_parent"
     android:layout_margin="5dp"
     android:gravity="end"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/billSubjectTextView"
@@ -34,7 +35,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="נגד"
+            android:text="@string/against_vote"
+            android:background="#BDBDBD"
             android:id="@+id/button" />
 
         <Button
@@ -42,14 +44,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="נמנע"
+            android:text="@string/avoid_vote"
+            android:background="#BDBDBD"
             android:id="@+id/button2" />
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="בעד"
+            android:text="@string/for_vote"
+            android:background="#BDBDBD"
             android:id="@+id/button3" />
     </LinearLayout>
 
