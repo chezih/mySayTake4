@@ -37,7 +37,7 @@ public class User implements Serializable {
                     this.firstName = userJson.getString(key);
                     break;
                 }
-                case "user name": {
+                case "username": {
                     this.userName = userJson.getString(key);
                     break;
                 }
