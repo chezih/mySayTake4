@@ -32,6 +32,7 @@ public class BL {
     private final String USER_TABLE_PATH_NAME = "user-profile";
     private final String BILL_TABLE_PATH_NAME = "bill";
     private final String BILL_COMMENT_TABLE_PATH_NAME = "bill-comment";
+    private final String USER_BILL_TABLE_PATH_NAME = "user-bill";
 
     public void setToken(String token)
     {
@@ -91,6 +92,20 @@ public class BL {
 
         return bills;
 
+    }
+
+    public ArrayList<UserBill> getAllUserBills() throws JSONException, ExecutionException, InterruptedException {
+        String userBillsJsonString = comm.getJsonByPath(USER_BILL_TABLE_PATH_NAME);
+
+        ArrayList<UserBill> bills = new ArrayList<UserBill>();
+        JSONArray jsonArray = new JSONArray(userBillsJsonString);
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject billObject =
+                    jsonArray.getJSONObject(i);
+            bills.add(new UserBill(billObject));
+        }
+        return bills;
     }
 
 

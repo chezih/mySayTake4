@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.chamud.cheziandsima.mysaytake4.Fragments.BillsFragment;
+import com.chamud.cheziandsima.mysaytake4.Fragments.UserBillFragment;
 import com.chamud.cheziandsima.mysaytake4.R;
 
 /**
@@ -28,10 +29,10 @@ public class TabsPageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                // Top Rated fragment activity
-                return new BillsFragment();
+                // Private bill
+                return new UserBillFragment();
             case 1:
-                // Games fragment activity
+                //  bill
                 return new BillsFragment();
 
         }

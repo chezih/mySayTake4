@@ -48,8 +48,6 @@ public class BillsFragment extends ListFragment {
         getListView().setDividerHeight(40);
 
         this.getAllBills();
-
-
     }
 
     @Override
